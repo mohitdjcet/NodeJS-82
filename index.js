@@ -1,30 +1,21 @@
-// //fs - file system module //core module
-// const fs = require('fs');
+const fs = require('fs');
 
-// console.log("Start");
+// fs.writeFileSync('data.txt', "This is sync Write")
+  
+// console.log("File created successfully");
 
-// fs.readFile("data.txt","utf8",(err,data)=>{
-//     if(err){
-//         console.log("Error reading file",err);
-//         return;
+// fs.appendFile('data.txt', " This is async append\nABCD", (err) => {
+//     if (err) {
+//         console.error("Error appending to file:", err);
+//     } else {
+//         console.log("Data appended successfully");
 //     }
-//     console.log(data);
-// })
+// });
 
-// // const data = fs.readFileSync("data.txt","utf8");
-// // console.log(data);
-
-// console.log("End");
-
-const fs = require('fs').promises;
-
-async function readData(){
-    try{
-        const data = await fs.readFile("data.txt","utf8");
-        console.log(data);
-    } catch(err){
-        console.log("Error",err);
+fs.unlink('data.txt', (err) => {
+    if (err) {
+        console.error("Error deleting file:", err);
+    } else {
+        console.log("File deleted successfully");
     }
-}
-
-readData();
+});
