@@ -1,21 +1,32 @@
+//Path Module
+// const path = require('path');
+// import path from 'path';
+
+//Path Join Method
+// const filePath = path.join(__dirname,"data.txt");
+
+// const filePath = path.join(__dirname);
+// const filePath = path.join(__filename);
+
+// const file = "Users/mohitkumar/Desktop/MERN-82/nodejs-app/index.js";
+
+// console.log(path.extname("data.txt"));
+
+// const filePath = path.resolve("files","data.txt");
+
+// console.log(filePath);
+
 const fs = require('fs');
+const path = require('path');
 
-// fs.writeFileSync('data.txt', "This is sync Write")
-  
-// console.log("File created successfully");
+const filePath = path.join(__dirname,"test",'data.txt');
 
-// fs.appendFile('data.txt', " This is async append\nABCD", (err) => {
-//     if (err) {
-//         console.error("Error appending to file:", err);
-//     } else {
-//         console.log("Data appended successfully");
-//     }
-// });
+// console.log(filePath);
 
-fs.unlink('data.txt', (err) => {
-    if (err) {
-        console.error("Error deleting file:", err);
-    } else {
-        console.log("File deleted successfully");
+fs.readFile(filePath,'utf-8',(err,data)=>{
+    if(err){
+        console.log(err);
+    }else{
+        console.log(data);
     }
 });
