@@ -1,11 +1,20 @@
-const os = require('os');
+const {EventEmitter} = require("events");
 
-// console.log(os.platform());
-// console.log(os.arch());
-// console.log(os.totalmem() /1024 / 1024 / 1024 + ' GB');
-// console.log(os.freemem());
-// console.log(os.cpus());
-console.log(os.userInfo());
-console.log(os.hostname());
-//Sytem uptime
-console.log(os.uptime() / 60 / 60 + ' hours');
+const myEmitter = new EventEmitter();
+
+//Listen Register 
+// myEmitter.on("greet",(userName)=>{
+//     console.log(`${userName} has logged in`);
+// })
+
+// myEmitter.once("greet",(userName)=>{
+//     console.log(`${userName} has logged out`);
+// })
+
+myEmitter.on("error",(err)=>{
+    console.log("Error Occur", err.message);
+})
+
+//Event Trigger
+myEmitter.emit("error",new Error("something went wrong"));
+// myEmitter.emit("greet","Mohit");
