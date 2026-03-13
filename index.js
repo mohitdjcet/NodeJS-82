@@ -1,20 +1,13 @@
-const {EventEmitter} = require("events");
+//HTTP
 
-const myEmitter = new EventEmitter();
+const http = require("http");
 
-//Listen Register 
-// myEmitter.on("greet",(userName)=>{
-//     console.log(`${userName} has logged in`);
-// })
+const server = http.createServer((req,res)=>{
+    res.writeHead(200, {"Content-Type":"text/plain"});
 
-// myEmitter.once("greet",(userName)=>{
-//     console.log(`${userName} has logged out`);
-// })
+    res.end("Hello from Node Server")
+});
 
-myEmitter.on("error",(err)=>{
-    console.log("Error Occur", err.message);
-})
-
-//Event Trigger
-myEmitter.emit("error",new Error("something went wrong"));
-// myEmitter.emit("greet","Mohit");
+server.listen(3001,()=>{
+    console.log("Server is running on port 3001");
+});
