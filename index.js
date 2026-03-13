@@ -1,13 +1,48 @@
-//HTTP
+// function loginUser(callback){
+//     setTimeout(()=>{
+//         console.log("User Logged in")
+//         callback();
+//     },3000);
+// }
 
-const http = require("http");
+// function getProfile(callback){
+//     setTimeout(()=>{
+//         console.log("getProfile")
+//         callback();
+//     },3000);
+// }
 
-const server = http.createServer((req,res)=>{
-    res.writeHead(200, {"Content-Type":"text/plain"});
+// function getPost(callback){
+//     setTimeout(()=>{
+//         console.log("getPost")
+//         callback();
+//     },3000);
+// }
 
-    res.end("Hello from Node Server")
-});
+// loginUser(()=>{
+//     getProfile(()=>{
+//         getPost(()=>{
+//             console.log("All Task Done")
+//         })
+//     })
+// })
 
-server.listen(3001,()=>{
-    console.log("Server is running on port 3001");
-});
+function step1(){
+    return Promise.resolve("Step 1 completed")
+}
+function step2(){
+    return Promise.resolve("Step 2 completed")
+}
+function step3(){
+    return Promise.resolve("Step 3 completed")
+}
+
+step1().then((result)=>{
+    console.log(result);
+    return step2();
+}).then((result)=>{
+    console.log(result);
+    return step3();
+}).then((result)=>{
+    console.log(result);
+})
