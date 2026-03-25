@@ -1,30 +1,43 @@
-import express from "express";
+import express from 'express';
 
 const app = express();
 
-// const logger = (req,res,next) =>{
-//     console.log(`METHOD: ${req.method} url: ${req.url}`);
-//     next();
-// }
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+// //Static folder path
+// app.use(express.static("public"));
 
-let users=[
-    {id:1,name:"Mohit"},
-    {id:2,name:"Rohit"}
-]
+// app.get("/",(req,res)=>{
+//     throw new Error("Something went wrong")
+// })
 
-app.get("/users",(req,res)=>{
-    res.json(users)
+// //Error Middleware
+// app.use((err,req,res,next)=>{
+//     console.log(err.message);
+
+//     res.status(500).json({
+//         message:"Internal Server Error"
+//     })
+// }) 
+
+app.get("/",(req,res)=>{
+    res.status(200).send("Sucesss")
 })
 
-app.post("/form", (req, res) => {
-    console.log("Headers:", req.headers);
-    console.log("Body:", req.body);
-    res.send("Done");
-});
-
-app.listen(3001,()=>{
-    console.log("Server is running on port 3001");
-    
+app.get("/not-found",(req,res)=>{
+    res.status(401).json({
+        message:"Page Not Found"
+    })
 })
+
+app.get("/error",(req,res)=>{
+    res.status(500).json({
+        message:"Internal server ereror"
+    })
+})
+
+app.listen(3001);
+
+//Range: 1**-Informatinal
+//2**-Sucess
+//3**-Redirect
+//4**-Client Error
+//5**- Server Error
