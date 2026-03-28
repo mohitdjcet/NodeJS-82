@@ -1,39 +1,14 @@
-import express from "express";
-import { MongoClient } from "mongodb";
+import app from "./app.js";
+import { connectDB } from "./config/db.js";
 
-const app = express();
 const PORT = 5001;
 
-//MongoDB URL
-const url = "mongodb://localhost:27017";
+async function startServer() {
+  await connectDB();
 
-//Create Client
-const client= new MongoClient(url);
-
-//DB NAME
-const dbName = "myApp";
-
-let db;
-
-//Connect to MongoDB
-async function connectDB(){
-    try{
-        await client.connect();
-        console.log("MD Connected");
-        db = client.db(dbName)
-    } catch(err){
-        console.log("Connection Error:", err)
-    }
+  app.listen(PORT, () => {
+    console.log("Server running on port", PORT);
+  });
 }
 
-//Route
-app.get("/", async (req,res)=>{
-    const users = await db.collection("users").find().toArray();
-    res.json(users);
-})
-
-//Server start
-app.listen(PORT, async ()=>{
-    await connectDB();
-    console.log("server is running port", PORT)
-})
+startServer();
